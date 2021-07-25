@@ -8,7 +8,7 @@ if ( $_REQUEST ) {
             $var .= $key.": ".$value. "\n";
             //fwrite($file, $var. PHP_EOL);
         }
-        $to = "tonysotogomez@email.com";
+        $to = "tonysotogomez@gmail.com";
         $subject = "MP Endpoint";
         $message = json_encode($var);
         
