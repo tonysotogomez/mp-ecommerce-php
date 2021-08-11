@@ -1,81 +1,3 @@
-<?php
-
-$base_url = "https://".$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
-$integrator_id =  "dev_24c65fb163bf11ea96500242ac130004";
-
-if ( ! $_POST ) {
-    header("Location: ".$base_url."/");
-    //exit;
-}
-    require_once 'vendor/autoload.php'; // You have to require the library from your Composer vendor folder
-    //TEST-4200800708418371-071504-f8161070e53d88120d9b65a0c7cf33b4-791532356
-    MercadoPago\SDK::setAccessToken("APP_USR-8208253118659647-112521-dd670f3fd6aa9147df51117701a2082e-677408439");
-    
-
-    // curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer TEST-5030617069081005-071502-df2f22f8e02085e43db8293bd5244d0b-132740285" "https://api.mercadopago.com/users/test_user" -d "{'site_id':'MPE'}"
-   //Vendedor 
-   //{"id":791532356,"nickname":"TESTDJQXIN8B","password":"qatest4750","site_status":"active","email":"test_user_44817001@testuser.com"}
-
-   //Comprador
-  // {"id":791532657,"nickname":"TESTIQZOMZQW","password":"qatest5401","site_status":"active","email":"test_user_25604839@testuser.com"}
-
-
-    //Datos de comprador
-    $payer = new MercadoPago\Payer();
-    $payer->name = "Lalo";
-    $payer->surname = "Landa";
-    $payer->email = "test_user_46542185@testuser.com";
-    $payer->phone = array(
-      "area_code" => "11",
-      "number" => "22223333"
-    );
-    $payer->identification = array(
-      "type" => "DNI",
-      "number" => "12345678"
-    );
-    $payer->address = array(
-      "street_name" => "Falsa",
-      "street_number" => 123,
-      "zip_code" => "1111"
-    );
-
-    // Crea un objeto de preferencia
-    $preference = new MercadoPago\Preference();
-
-    // Crea un ítem en la preferencia
-    $item = new MercadoPago\Item();
-    $item->id                 = "1234";
-    $item->title              = $_POST['title'];
-    $item->description        = "Dispositivo móvil de Tienda e-commerce";
-    $item->picture_url        = $base_url.$_POST['img'];
-    $item->quantity           = $_POST['unit'];
-    $item->unit_price         = $_POST['price'];
-
-    $preference->external_reference = "tonysotogomez@gmail.com";
-
-    $preference->payment_methods = array(
-        "excluded_payment_methods" => array(
-          array("id" => "diners")
-        ),
-        "excluded_payment_types" => array(
-          array("id" => "redlink")
-        ),
-        "installments" => 6
-      );
-
-    $preference->back_urls = array(
-        "success" => $base_url."/success.php",
-        "failure" => $base_url."/failure.php",
-        "pending" => $base_url."/pending.php"
-    );
-    $preference->auto_return = "approved";
-
-    $preference->notification_url = "https://devva.casa-andina.com/admin/mp";//$base_url."/endpoint.php";
-
-    $preference->items = array($item);
-    $preference->payer = $payer;
-    $preference->save();
-?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
@@ -89,9 +11,8 @@ if ( ! $_POST ) {
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+    <script src="https://www.mercadopago.com/v2/security.js" view=""></script>
        
-    <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
-
     <link rel="stylesheet" href="./assets/category-landing.css" media="screen, print">
     <link rel="stylesheet" href="./assets/category.css" media="screen, print">
     <link rel="stylesheet" href="./assets/merch-tools.css" media="screen, print">
@@ -139,7 +60,6 @@ if ( ! $_POST ) {
                 </div>
             </div>
             <div class="as-search-results as-filter-open as-category-landing as-desktop" id="as-search-results">
-
                 <div id="accessories-tab" class="as-accessories-details">
                     <div class="as-accessories" id="as-accessories">
                         <div class="as-accessories-header">
@@ -150,64 +70,32 @@ if ( ! $_POST ) {
                         <div class="as-searchnav-placeholder" style="height: 77px;">
                             <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
                                 <div class="as-accessories-filter-tile column large-6 small-3">
-
                                     <button class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button">
                                         <h2 class=" as-filter-button-text">
-                                            Smartphones
+                                            PAGO RECHAZADO
                                         </h2>
                                     </button>
-
-
                                 </div>
-
                             </div>
                         </div>
                         <div class="as-accessories-results  as-search-desktop">
                             <div class="width:60%">
-                                <div class="as-producttile-tilehero with-paddlenav " style="float:left;">
-                                    <div class="as-dummy-container as-dummy-img">
-
-                                        <img src="./assets/wireless-headphones" class="ir ir item-image as-producttile-image  " style="max-width: 70%;max-height: 70%;"alt="" width="445" height="445">
-                                    </div>
-                                    <div class="images mini-gallery gal5 ">
-                                    
-
-                                        <div class="as-isdesktop with-paddlenav with-paddlenav-onhover">
-                                            <div class="clearfix image-list xs-no-js as-util-relatedlink relatedlink" data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
-                                                <div class="as-tilegallery-element as-image-selected">
-                                                    <div class=""></div>
-                                                    <img src="./assets/003.jpg" class="ir ir item-image as-producttile-image" alt="" width="445" height="445" style="content:-webkit-image-set(url(<?php echo $_POST['img'] ?>) 2x);">
-                                                </div>
-                                                
-                                            </div>
-
-                                            
-                                        </div>
-
-                                        
-
-                                    </div>
-
-                                </div>
+                                <br>
                                 <div class="as-producttile-info" style="float:left;min-height: 168px;">
-                                    <div class="as-producttile-titlepricewraper" style="min-height: 128px;">
-                                        <div class="as-producttile-title">
-                                            <h3 class="as-producttile-name">
-                                                <p class="as-producttile-tilelink">
-                                                    <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
-                                                </p>
+                                    <p>collection_id = <?php echo $_GET['collection_id'] ?></p>
+                                    <p>collection_status = <?php echo $_GET['collection_status'] ?></p>
+                                    <p><b>payment_id = <?php echo $_GET['payment_id'] ?></b></p>
+                                    <p>status = <?php echo $_GET['status'] ?></p>
+                                    <p><b>external_reference = <?php echo $_GET['external_reference'] ?></b></p>
+                                    <p><b>payment_type = <?php echo $_GET['payment_type'] ?></b></p>
+                                    <p>merchant_order_id = <?php echo $_GET['merchant_order_id'] ?></p>
+                                    <p>preference_id = <?php echo $_GET['preference_id'] ?></p>
+                                    <p>site_id = <?php echo $_GET['site_id'] ?></p>
+                                    <p>processing_mode = <?php echo $_GET['processing_mode'] ?></p>
+                                    <p>merchant_account_id = <?php echo $_GET['merchant_account_id'] ?></p>
 
-                                            </h3>
-                                        </div>
-                                        <h3 >
-                                            <?php echo $_POST['unit'] ?>
-                                        </h3>
-                                        <h3 >
-                                            <?php echo "$" . $_POST['price'] ?>
-                                        </h3>
-                                    </div>
-                                    <div class="cho-container"></</div>
                                 </div>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -219,31 +107,8 @@ if ( ! $_POST ) {
             <div class="as-footnotes-content">
                 <div class="as-footnotes-sosumi">
                     Todos los derechos reservados Tienda Tecno 2021
-                    <?php //var_dump($preference); ?>
                 </div>
             </div>
         </div>
-
-</div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div class="mp-mercadopago-checkout-wrapper" style="z-index:-2147483647;display:block;background:rgba(0, 0, 0, 0.7);border:0;overflow:hidden;visibility:hidden;margin:0;padding:0;position:fixed;left:0;top:0;width:0;opacity:0;height:0;transition:opacity 220ms ease-in;"> <svg class="mp-spinner" viewBox="25 25 50 50"> <circle class="mp-spinner-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"></circle> </svg> </div><div id="ac-gn-viewport-emitter"> </div>
-
-<script src="https://sdk.mercadopago.com/js/v2"></script> 
-<script>
-// Agrega credenciales de SDK
-  const mp = new MercadoPago('TEST-d5796f4a-db63-4365-bc8d-23e61a670c95', {
-        locale: 'es-AR'
-  });
-
-  // Inicializa el checkout
-  mp.checkout({
-      preference: {
-          id: "<?=$preference->id?>"
-      },
-      render: {
-            container: '.cho-container', // Indica dónde se mostrará el botón de pago
-            label: 'Pagar la compra', // Cambia el texto del botón de pago (opcional)
-      }
-});
-</script>
-
 </body>
 </html>
