@@ -55,10 +55,11 @@ if ( ! $_POST ) {
 
     $preference->payment_methods = array(
         "excluded_payment_methods" => array(
-          array("id" => "diners")
+          array("id" => "diners"),
+          array("id" => "amex")
         ),
         "excluded_payment_types" => array(
-          array("id" => "redlink")
+          array("id" => "pagoefectivo_atm")
         ),
         "installments" => 6
       );
@@ -219,7 +220,7 @@ if ( ! $_POST ) {
             <div class="as-footnotes-content">
                 <div class="as-footnotes-sosumi">
                     Todos los derechos reservados Tienda Tecno 2021
-                    <?php //var_dump($preference); ?>
+                    <pre style="display: none;"><?php var_dump($preference); ?></pre>
                 </div>
             </div>
         </div>
