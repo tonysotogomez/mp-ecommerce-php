@@ -1,6 +1,6 @@
 <?php
 
-$base_url = "https://".$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'];
+$base_url = "https://".$_SERVER['SERVER_NAME'];
 $integrator_id =  "dev_24c65fb163bf11ea96500242ac130004";
 
 if ( ! $_POST ) {
